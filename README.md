@@ -10,7 +10,7 @@ or
 $ yum install freeglut  
 $ yum install freeglut-devel  
   
-### Make
+### Compile
 $ make
 
 ### Exec
