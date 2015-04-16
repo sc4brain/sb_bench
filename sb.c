@@ -26,6 +26,9 @@ GLboolean  stats = GL_FALSE;
 GLfloat    weld_distance = 0.00001;
 GLuint     material_mode = 0;
 
+GLfloat    fps=0.0;
+GLint      nframe=0;
+
 /* text: general purpose text routine.  draws a string according to
  * format in a stroke font at x, y after scaling it by the scale
  * specified (scale is in window-space (lower-left origin) pixels).  
@@ -153,16 +156,14 @@ reshape(int width, int height)
 void
 display(void)
 {
-  static int start, end, last;
-
-  start = glutGet(GLUT_ELAPSED_TIME);
+  nframe++;
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   if (performance) {
     glColor3f(1.0, 1.0, 1.0);
-    text(5, 5, 20, "%.2f fps", 1.0 / ((end - last) / 1000.0));
-    last = start;
+    //text(5, 5, 20, "%.2f fps", 1.0 / ((end - last) / 1000.0));
+    text(5, 5, 20, "%.2f fps", fps);
   }
 
   glPushMatrix();
@@ -206,7 +207,6 @@ display(void)
 
   glutSwapBuffers();
 
-  end = glutGet(GLUT_ELAPSED_TIME);
 }
 
 /* ARGSUSED1 */
@@ -284,6 +284,23 @@ motion(int x, int y)
   glutPostRedisplay();
 }
 
+
+
+void fpstimer(int value)
+{
+  static int prev=0, now=0;
+  static unsigned int nframe_prev=0;
+
+  now = glutGet(GLUT_ELAPSED_TIME);
+
+  fps = (float)(nframe - nframe_prev)/(now - prev)*1000.0;
+  nframe_prev = nframe;
+  prev = now;
+
+  glutTimerFunc(1000, fpstimer, 0);
+}
+
+
 #define USAGE "Usage : \n\t$ ./sb MODEL_ID\n\tMODEL_ID = 1:SB128 2:SB256 3:neurons\n"
 
 int
@@ -333,6 +350,8 @@ main(int argc, char** argv)
     exit(-1);
   }
   lists();
+
+  glutTimerFunc(1000, fpstimer, 0);
 
   
   glutMainLoop();
