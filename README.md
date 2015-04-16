@@ -10,8 +10,16 @@ or
 $ yum install freeglut  
 $ yum install freeglut-devel  
   
-### Make
+### Compile
 $ make
 
 ### Exec
-$ ./sb
+$ ./sb  1  
+or  
+$ ./sb  2  
+or  
+$ ./sb  3  
+  
+1 : low resolution Standard Brain  
+2 : high resolution Standard Brain  
+3 : Standard Brain neurons (high resolution)  
