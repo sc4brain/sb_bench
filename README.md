@@ -14,11 +14,11 @@ $ yum install freeglut-devel
 $ make
 
 ### Exec
-$ ./sb  1
-or
-$ ./sb  2
-or
-$ ./sb  3
+$ ./sb  1  
+or  
+$ ./sb  2  
+or  
+$ ./sb  3  
   
 1 : low resolution Standard Brain  
 2 : high resolution Standard Brain  
