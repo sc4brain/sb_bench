@@ -1,5 +1,6 @@
 *~
 obj/
+sb
 
 # Object files
 *.o
