@@ -5,7 +5,7 @@ CFLAGS=-g -Wall
 LDFLAGS=-lglut -lGLU -lGL -lm
 
 OBJS=sb.o glm.o tb.o trackball.o
-TARGET=sb
+TARGET=sb obj
 
 all: $(TARGET)
 
@@ -17,3 +17,6 @@ sb: $(OBJS)
 
 clean:
 	rm -rf *.o *~ $(TARGET)
+
+obj:
+	tar xvzfm obj.tar.gz

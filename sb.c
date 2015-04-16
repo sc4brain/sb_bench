@@ -1,4 +1,5 @@
 #include <math.h>
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
@@ -283,18 +284,26 @@ motion(int x, int y)
   glutPostRedisplay();
 }
 
+#define USAGE "Usage : \n\t$ ./sb MODEL_ID\n\tMODEL_ID = 1:SB128 2:SB256 3:neurons\n"
 
 int
 main(int argc, char** argv)
 {
   char sb_filename[100];
 
+  if(argc!=2){
+    printf("%s", USAGE);
+    exit(-1);
+  }
   if(argv[1][0]=='1'){
     strcpy(sb_filename, "obj/SB128.obj");
   }else if(argv[1][0]=='2'){
     strcpy(sb_filename, "obj/SB256.obj");
   }else if(argv[1][0]=='3'){
     strcpy(sb_filename, "obj/bench_neuron.obj");
+  }else{
+    printf("%s", USAGE);
+    exit(-1);
   }
 
   glutInitWindowSize(900, 900);
@@ -311,7 +320,19 @@ main(int argc, char** argv)
   glutDisplayFunc(display);
   glutKeyboardFunc(keyboard);
   
+
   init();
+  if(argv[1][0]=='1'){
+    glmScale(model, 1.4);
+  }else if(argv[1][0]=='2'){
+    glmScale(model, 1.4);
+  }else if(argv[1][0]=='3'){
+    glmScale(model, 2.5);
+  }else{
+    printf("%s", USAGE);
+    exit(-1);
+  }
+  lists();
 
   
   glutMainLoop();

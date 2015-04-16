@@ -1,3 +1,6 @@
+*~
+obj/
+
 # Object files
 *.o
 *.ko
