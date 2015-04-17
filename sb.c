@@ -147,7 +147,9 @@ reshape(int width, int height)
   
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluPerspective(60.0, (GLfloat)height / (GLfloat)width, 1.0, 128.0);
+  glOrtho(-10., 10., -10., 10., -10.,10);
+  //gluPerspective(30.0, (GLfloat)height / (GLfloat)width, 1.0, 128.0);
+
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   glTranslatef(0.0, 0.0, -3.0);
@@ -163,7 +165,7 @@ display(void)
   if (performance) {
     glColor3f(1.0, 1.0, 1.0);
     //text(5, 5, 20, "%.2f fps", 1.0 / ((end - last) / 1000.0));
-    text(5, 5, 20, "%.2f fps", fps);
+    text(5, 5, 20, "%.2f FPS", fps);
   }
 
   glPushMatrix();
@@ -318,6 +320,8 @@ main(int argc, char** argv)
     strcpy(sb_filename, "obj/SB256.obj");
   }else if(argv[1][0]=='3'){
     strcpy(sb_filename, "obj/bench_neuron.obj");
+  }else if(argv[1][0]=='0'){
+    strcpy(sb_filename, "obj/cube.obj");
   }else{
     printf("%s", USAGE);
     exit(-1);
@@ -340,11 +344,13 @@ main(int argc, char** argv)
 
   init();
   if(argv[1][0]=='1'){
-    glmScale(model, 1.4);
+    glmScale(model, 5.);
   }else if(argv[1][0]=='2'){
-    glmScale(model, 1.4);
+    glmScale(model, 5.);
   }else if(argv[1][0]=='3'){
-    glmScale(model, 2.5);
+    glmScale(model, 9.);
+  }else if(argv[1][0]=='0'){
+    glmScale(model, 7.0);
   }else{
     printf("%s", USAGE);
     exit(-1);
